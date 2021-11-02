@@ -253,13 +253,26 @@
                 <div class="section-title-4 text-center mb-55" data-aos="fade-up" data-aos-delay="200">
                     <h2>Ask Us Anything Here</h2>
                 </div>
-                <form action="assets/php/mail.php" method="post">
+               <div class="contact-form-wrap" data-aos="fade-up" data-aos-delay="200">
+                    <form class="contact-form-style" id="contact-form" action="assets/php/mail.php" method="post">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <input name="name" type="text" placeholder="Name*">
+                                <input name="email" type="email" placeholder="Email*">
+                                <input name="subject" type="text" placeholder="Subject*">
+                                <input name="phone" type="text" placeholder="Phone*">
+                            </div>
+                            <div class="col-lg-8">
+                                <textarea name="message" placeholder="Message"></textarea>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-12 contact-us-btn btn-hover">
+                                <button class="submit" type="submit">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
 
-Ваше имя <input type="text" name="first_name"><br>
-Email: <input type="text" name="email" required placeholder="Обязательное поле"><br>
-Сообщение:<br><textarea rows="5" name="message" cols="30"></textarea><br>
-<input type="submit" name="submit" value="Submit">
-</form>
+
+
                     <p class="form-messege"></p>
                 </div>
             </div>
