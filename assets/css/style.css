@@ -11885,6 +11885,22 @@ display:none;
   line-height: 66px;
 }
 
+
+body {
+  top: 0 !important;
+}
+.skiptranslate {
+  display: none;
+  height: 0;
+}
+.language__img {
+  cursor: pointer;
+}
+
+
+
+
+
 /*кнопка обратной связи*/
 .email-bt i  {
   -webkit-animation: opsimple 3s infinite;
