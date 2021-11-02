@@ -9,7 +9,7 @@ $message = strip_tags(htmlspecialchars($_POST['message']));
 $to = "stydiaoblako@mail.ru"; // Здесь писать e-mail кому придет сообщение
 $subject = "Заказ на обратный звонок от:  $name";
 $body = "На вашем сайте был визит и сделан заказ на обратный звонок.\n\n"."\nИмя: $name\n\nТема сообщений: $subject\nСообщение: $message";
-$header = "From: service@argynbek.kz\n"; // Здесь писать e-mail от которого идет сообщениие
+$header = "From: liliana579@mail.ru\n"; // Здесь писать e-mail от которого идет сообщениие
 
 
 
