@@ -1,5 +1,5 @@
 <?php
-    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Origin: liliana579@mail.ru");
     // Only process POST reqeusts.
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Get the form fields and remove whitespace.
