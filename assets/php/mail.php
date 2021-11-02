@@ -1,29 +1,56 @@
 <?php
+    header("Access-Control-Allow-Origin: *");
+    // Only process POST reqeusts.
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Get the form fields and remove whitespace.
+        $name = strip_tags(trim($_POST["name"]));
+				$name = str_replace(array("\r","\n"),array(" "," "),$name);
+        $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+        $subject = trim($_POST["subject"]);
+		$phone = trim($_POST["phone"]);
+        $message = trim($_POST["message"]);
 
-if(isset($_POST['submit'])){
-$to = "stydiaoblako@mail.ru";; // Здесь нужно написать e-mail, куда будут приходить письма
-$from = $_POST['email']; // this is the sender's Email address
-$first_name = $_POST['first_name'];
-$subject = "Форма отправки сообщений с сайта";
-$subject2 = "Copy of your form submission";
-$message = $first_name . " оставил сообщение:" . "\n\n" . $_POST['message'];
-$message2 = "Here is a copy of your message " . $first_name . "\n\n" . $_POST['message'];
+        // Check that data was sent to the mailer.
+        if ( empty($name) OR empty($phone) OR empty($subject) OR empty($message) OR !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            // Set a 400 (bad request) response code and exit.
+            http_response_code(400);
+            echo "Please complete the form and try again.";
+            exit;
+        }
 
-$headers = "From:" . $from;
-$headers2 = "From:" . $to;
+        // Set the recipient email address.
+        // FIXME: Update this to your desired email address.
+        $recipient = "stydiaoblako@mail.ru";
 
-mail($to,$subject,$message,$headers);
-// mail($from,$subject2,$message2,$headers2); // sends a copy of the message to the sender - Отключено!
-echo "Сообщение отправлено. Спасибо Вам " . $first_name . ", мы скоро свяжемся с Вами.";
-echo "<br /><br /><a href='https://epicblog.net'>Вернуться на сайт.</a>";
+        // Set the email subject.
+        $subject = "$subject";
 
-}
+        // Build the email content.
+        $email_content = "Name: $name\n";
+        $email_content .= "Email: $email\n\n";
+        $email_content .= "Subject: $subject\n\n";
+        $email_content .= "Phone: $phone\n\n";
+        $email_content .= "Message:\n$message\n";
+
+        // Build the email headers.
+        $email_headers = "From: $name <$email>";
+
+        // Send the email.
+        if (mail($recipient, $subject, $email_content, $email_headers)) {
+            // Set a 200 (okay) response code.
+            http_response_code(200);
+            echo "Thank You! Your message has been sent.";
+        } else {
+            // Set a 500 (internal server error) response code.
+            http_response_code(500);
+            echo "Oops! Something went wrong and we couldn't send your message.";
+        }
+
+    } else {
+        // Not a POST request, set a 403 (forbidden) response code.
+        http_response_code(403);
+        echo "There was a problem with your submission, please try again.";
+    }
 
 ?>
 
-
-<!--Переадресация на главную страницу сайта, через 3 секунды-->
-<script language="JavaScript" type="text/javascript">
-function changeurl(){eval(self.location="https://epicblog.net/index.php");}
-window.setTimeout("changeurl();",3000);
-</script>
