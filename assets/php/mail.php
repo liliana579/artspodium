@@ -1,11 +1,11 @@
 <?php
-    header("Access-Control-Allow-Origin: liliana579@mail.ru");
+    header("Access-Control-Allow-Origin: *");
     // Only process POST reqeusts.
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Get the form fields and remove whitespace.
         $name = strip_tags(trim($_POST["name"]));
 				$name = str_replace(array("\r","\n"),array(" "," "),$name);
-        $email = filter_var(trim($_POST["stydiaoblako@mail.ru"]), FILTER_SANITIZE_EMAIL);
+        $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
         $subject = trim($_POST["subject"]);
 		$phone = trim($_POST["phone"]);
         $message = trim($_POST["message"]);
