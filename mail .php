@@ -37,4 +37,4 @@ if(!$mail->send()) {
 } else {
     header('location: thank-you.html');
 }
-?>
+?> 
